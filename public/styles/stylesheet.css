@@ -193,6 +193,18 @@ ol {
     font-family: var(--font-paragraph);
 }
 
+/* ---------------------------------- Detail + summary -------------------------------- */
+
+details {
+    font-family: var(--font-paragraph);
+
+    summary {
+        font-family: var(--font-header);
+        font-size: clamp(0.9rem, 1rem + 0vw, 0.8rem);
+    }
+}
+
+
 /* ---------------------------------- Knoppen -------------------------------- */
 
 a {
