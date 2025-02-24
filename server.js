@@ -6,7 +6,6 @@ import { Liquid } from 'liquidjs';
 // Vul hier jullie team naam in
 const teamName = 'chill';
 
-
 const app = express()
 
 app.use(express.static('public'))
