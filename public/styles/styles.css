@@ -144,13 +144,6 @@ main {
         }
     }
 
-    .detail {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1em;
-
         h1 {
             text-align: center;
             padding: 0.5em 0em 0em 0em;
@@ -173,19 +166,14 @@ main {
             }
         }
 
-        .bio {
-            display: flex;
-            justify-content: center;
-
-            p {
+            .introductie {
                 max-width: 100%;
                 text-align: center;
 
                 @media screen and (min-width: 960px) {
-                    max-width: 75%;
+                    max-width: 60%;
                 }
             }
-        }
 
         .meer-info {
             display: flex;
@@ -195,7 +183,10 @@ main {
             justify-content: center;
             padding: 2em 0em 0em 0em;
 
-            p {
+            li {
+                list-style-type: none;
+
+                 p {
                 display: flex;
                 align-items: center;
                 gap: .5em;
@@ -203,9 +194,9 @@ main {
                 border-radius: 10px;
                 padding: 0.7em 1.3em;
             }
+            }
         }
     }
-}
 
 /* ---------------------------------- Footer -------------------------------------- */
 

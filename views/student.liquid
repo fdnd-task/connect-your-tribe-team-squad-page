@@ -1,6 +1,6 @@
 {% render 'partials/head.liquid', title: person.name %}
 
-<main class="width-top-btm">
+<main class="detail width-top-btm">
 
     <div class="link-back">
         <a class="back-link" href="/">
@@ -13,7 +13,7 @@
 
         <img class="profile" src="{{ person.avatar | default: '/assets/default-user-avatar.svg' }}" alt="">
         <h1>{{ person.name }}</h1>
-        <p>{{ person.bio | default: "Eerstejaars FDND student aan de HVA." | truncatewords: 20 }}</p>
+        <p class="introductie">{{ person.bio | default: "Eerstejaars FDND student aan de HVA." | truncatewords: 20 }}</p>
 
         <ul class="meer-info">
             <li><p><img class="label" src="/assets/books-icon.svg" alt="">{{ person.fav_book_genre | default: "Alle genres" }}</p></li>
