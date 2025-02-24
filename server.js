@@ -18,16 +18,28 @@ app.set('views', './views')
 
 app.use(express.urlencoded({extended: true}))
 
+// Haal alle studenten uit squad G1 op
+const squadResponse = await fetch('https://fdnd.directus.app/items/squad?filter={"_and":[{"cohort":"2425"},{"tribe":{"name":"FDND Jaar 1"}}]}')
+const squadResponseJSON = await squadResponse.json()
+
 
 app.get('/', async function (request, response) {
-  const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team ${teamName}"}`)
-  const messagesResponseJSON = await messagesResponse.json()
+  // Haal alle personen op van squad G1
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={%22_and%22:[{%22squads%22:{%22squad_id%22:{%22tribe%22:{%22name%22:%22FDND%20Jaar%201%22}}}},{%22squads%22:{%22squad_id%22:{%22cohort%22:%222425%22}}},{%22squads%22:{%22squad_id%22:{%22name%22:%221G%22}}}]}');
+  const personResponseJSON = await personResponse.json();
+
+  // Haal berichten op voor het team
+  const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team ${teamName}"}`);
+  const messagesResponseJSON = await messagesResponse.json();
 
   response.render('index.liquid', {
     teamName: teamName,
+    persons: personResponseJSON.data,
+    squads: squadResponseJSON.data,
     messages: messagesResponseJSON.data
-  })
-})
+  });
+});
+
 
 app.post('/', async function (request, response) {
   await fetch('https://fdnd.directus.app/items/messages/', {
@@ -55,3 +67,11 @@ if (teamName == '') {
     console.log(`Application started on http://localhost:${app.get('port')}`)
   })
 }
+
+
+app.get('/student/:id', async function (request, response) {
+
+  const personDetailResponseJSON = await personDetailResponse.json()
+  
+  response.render('student.liquid', {person: personDetailResponseJSON.data, squads: squadResponseJSON.data})
+})
