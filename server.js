@@ -25,6 +25,7 @@ const squadResponseJSON = await squadResponse.json()
 
 app.get('/', async function (request, response) {
   // Haal alle personen op van squad G1
+
   const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={%22_and%22:[{%22squads%22:{%22squad_id%22:{%22tribe%22:{%22name%22:%22FDND%20Jaar%201%22}}}},{%22squads%22:{%22squad_id%22:{%22cohort%22:%222425%22}}},{%22squads%22:{%22squad_id%22:{%22name%22:%221G%22}}}]}');
   const personResponseJSON = await personResponse.json();
 
@@ -71,6 +72,7 @@ if (teamName == '') {
 
 app.get('/student/:id', async function (request, response) {
 
+  const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/' + request.params.id)
   const personDetailResponseJSON = await personDetailResponse.json()
   
   response.render('student.liquid', {person: personDetailResponseJSON.data, squads: squadResponseJSON.data})
