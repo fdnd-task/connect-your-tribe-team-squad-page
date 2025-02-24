@@ -1,4 +1,4 @@
-<h1>Zet 'm op team {{ teamName }}!</h1>
+<h1>Zet 'm op team {{ chill }}!</h1>
 
 <h2>Huidige berichten</h2>
 
@@ -6,6 +6,15 @@
 <p>{{ message.from }}: {{ message.text }} @{{ message.created | date: '%d-%m-%Y %H:%M' }}</p>
 {% else %}
 <p>Er zijn nog geen berichten voor dit team.</p>
+{% endfor %}
+
+{% for person in persons %}
+  <article>
+  <li><a href="/student/{{ person.id }}">{{ person.name }}</a></li>
+  <li><a href="/student/{{ person.birthdate}}">{{ person.birthdate | date: "%Y" }}</a></li>
+
+  <p> {{ person.squads.0.squad_id.name }} </p>
+  </article>
 {% endfor %}
 
 <h2>Voeg een bericht toe</h2>
