@@ -58,10 +58,13 @@ body {
             gap: 4em 2em;
         }
 
-        li {
+        .student {
             list-style-type: none;
             padding: 2em;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
 
             /* Background glass effect */
             background: rgba(255, 255, 255, 0.193);

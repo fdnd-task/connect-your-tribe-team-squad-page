@@ -15,9 +15,10 @@
   <ul id="person-list">
     {% for person in persons %}
 
-    <li class="student">
+    <li>
 
-      <article>
+      <article class="student" data-url="/student/{{ person.id }}">
+        <a href=""></a>
         <img class="avatar" src="{{ person.avatar | default: '/assets/default-user-avatar.svg' }}" alt="">
         <h2>{{ person.name }}</h2>
         <p>{{ person.bio | default: "Eerstejaars FDND student aan de HVA." | truncatewords: 20 }}</p>
@@ -70,4 +71,3 @@
   </label>
   <button type="submit">Verstuur</button>
 </form> {% endcomment %}
-
