@@ -1,0 +1,223 @@
+body {
+    background-image: url("/assets/blue-gradient-background.jpeg");
+    background-size: 100% 120%;
+    /* De afbeelding wordt exact geschaald naar de breedte en hoogte van de container */
+    background-position: 50% 0%;
+}
+
+.squadpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        text-align: center;
+    }
+
+    .inleiding {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .5em;
+        justify-content: center;
+
+        @media screen and (min-width: 960px) {
+            width: 40%;
+        }
+    }
+
+    .label {
+        display: flex;
+        padding: 2.5em 0em 0em 0em;
+    }
+
+    .filter-bookgenre {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1em;
+        padding: 1.5em 0em;
+
+        @media screen and (min-width: 960px) {
+            padding: 2.5em 0em 3.5em 0em;
+        }
+    }
+
+    #person-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        width: 100%;
+
+        gap: 4em;
+        padding: 2.5em 0em 0em 0em;
+
+        @media screen and (min-width: 640px) {
+            gap: 4em 2em;
+        }
+
+        li {
+            list-style-type: none;
+            padding: 2em;
+            width: 100%;
+
+            /* Background glass effect */
+            background: rgba(255, 255, 255, 0.193);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            transition: .2s ease-in-out;
+
+            @media screen and (min-width: 960px) {
+                width: 100%;
+            }
+
+            &:hover {
+                transform: translateY(-.5em);
+                transition: .2s ease-in-out;
+            }
+
+            .avatar {
+                border-radius: var(--big-rounded);
+                width: 7.5em;
+                height: 7.5em;
+                object-fit: cover;
+                margin: -5em 0em 2em 0em;
+            }
+
+            p {
+                text-align: left;
+                display: flex;
+                gap: .5em;
+
+                .book-icon {
+                    width: 1.3em;
+                }
+            }
+
+            .bio {
+                overflow: hidden;
+
+                p {
+                    padding: 1em 0em 0em 0em;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                flex-direction: row;
+                gap: .7em;
+                padding: 1em 0em 0em 0em;
+            }
+        }
+    }
+}
+
+/* ------------------------------------- Student.liquid -------------------------------------- */
+
+main {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .link-back {
+        margin: 0em 0em 2em 0em;
+        width: 100%;
+
+        @media screen and (min-width: 960px) {
+            margin: 0em 0em -2em 0em;
+        }
+
+        a {
+            display: inline-flex;
+            gap: .7em;
+            text-decoration: none;
+        }
+    }
+
+    .detail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+
+        h1 {
+            text-align: center;
+            padding: 0.5em 0em 0em 0em;
+        }
+
+        .profile {
+            border-radius: var(--big-rounded);
+            width: 100%;
+
+            @media screen and (min-width: 450px) {
+                width: 25em;
+                height: 25em;
+                object-fit: cover;
+            }
+
+            @media screen and (min-width: 960px) {
+                width: 25em;
+                height: 25em;
+                object-fit: cover;
+            }
+        }
+
+        .bio {
+            display: flex;
+            justify-content: center;
+
+            p {
+                max-width: 100%;
+                text-align: center;
+
+                @media screen and (min-width: 960px) {
+                    max-width: 75%;
+                }
+            }
+        }
+
+        .meer-info {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+            padding: 2em 0em 0em 0em;
+
+            p {
+                display: flex;
+                align-items: center;
+                gap: .5em;
+                border: 1px solid #fff;
+                border-radius: 10px;
+                padding: 0.7em 1.3em;
+            }
+        }
+    }
+}
+
+/* ---------------------------------- Footer -------------------------------------- */
+
+footer {
+
+    .divider {
+        padding: 1p;
+        width: 100%;
+        height: 1px;
+        background-color: #ffffff;
+    }
+
+    p {
+        text-align: center;
+        padding: 1em 0em 0em 0em;
+    }
+
+}
