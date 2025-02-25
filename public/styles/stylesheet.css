@@ -13,9 +13,9 @@ body {
     /* Witte achtergrondkleur */
     --primary-highlight-color: #2016C6;
     /* Helblauwe highlightkleur */
-    --primary-text-color: #ffffff;
+    --primary-text-color: var(--secondary-background-color);
     /* Witte tekstkleur */
-    --secondary-text-color: #000C24;
+    --secondary-text-color: var(--primary-background-color);
     /* Grijze tekstkleur */
 
     /* Fonts */
