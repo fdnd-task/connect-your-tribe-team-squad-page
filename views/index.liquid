@@ -1,3 +1,6 @@
+{% render 'views/head.liquid', title: 'Squad page' %}
+{% comment %} Recep {% endcomment %}
+<header>
 <h1>Zet 'm op team {{ teamName }}!</h1>
 
 <h2>Huidige berichten</h2>
@@ -7,25 +10,57 @@
 {% else %}
 <p>Er zijn nog geen berichten voor dit team.</p>
 {% endfor %}
+</header>
 
+{% comment %} Miel {% endcomment %}
+<section class="carrousel">
+  <button>1971</button>
+  <button>1973</button>
+  <button>1984</button>
+  <button>1990</button>
+  <button>1994</button>
+  <button>1999</button>
+  <button>2000</button>
+  <button>2001</button>
+  <button>2002</button>
+  <button>2003</button>
+  <button>2004</button>
+  <button>2005</button>
+  <button>2006</button>
+  <button>2007</button>
 {% for person in persons %}
   <article>
-  <li><a href="/student/{{ person.id }}">{{ person.name }}</a></li>
+
+  <li><a href="/student/{{ person.id }}">   <img src="{{ person.avatar }}" width="150px"></a></li>
   <li><a href="/student/{{ person.birthdate}}">{{ person.birthdate | date: "%Y" }}</a></li>
 
-  <p> {{ person.squads.0.squad_id.name }} </p>
   </article>
 {% endfor %}
+{% comment %} 1971 {% endcomment %}
 
+
+<div class="container">
+  <p>Scroll</p>
+</div>
+</section>
+
+{% comment %} Kate {% endcomment %}
+ <section>
 <h2>Voeg een bericht toe</h2>
-<form method="post" action="/">
-  <label>
-    Naam:
-    <input type="text" name="from" required>
-  </label>
-  <label>
-    Bericht:
-    <textarea name="text" required></textarea>
-  </label>
-  <button type="submit">Verstuur</button>
-</form>
+  <form method="post" action="/">
+    <label>
+      Naam:
+      <input type="text" name="from" required>
+    </label>
+    <label>
+      Bericht:
+      <textarea name="text" required></textarea>
+    </label>
+    <button type="submit">Verstuur</button>
+  </form>
+</section>
+
+{% comment %} Kyan {% endcomment %}
+<section></section>
+
+{% render 'views/end.liquid', squads: squads %}
