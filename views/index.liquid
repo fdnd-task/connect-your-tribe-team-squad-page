@@ -18,12 +18,23 @@
   <button>2005</button>
   <button>2006</button>
   <button>2007</button>
-{% for person in persons %}
+
+
+{% comment %} alle articles van 1971 {% endcomment %}
+{% for person in ninetySeventyOne %}
   <article>
+  <li> <img src="{{ person.avatar }}" width="150px" href="/student/{{ person.id }}"></a></li>
+  <p> {{ person.name }} </p>
+  </article>
+{% endfor %}
 
-  <li><a href="/student/{{ person.id }}">   <img src="{{ person.avatar }}" width="150px"></a></li>
-  <li><a href="/student/{{ person.birthdate}}">{{ person.birthdate | date: "%Y" }}</a></li>
 
+{% comment %} alle articles van 2005 {% endcomment %}
+
+{% for person in twoThousandFive %}
+  <article>
+  <li> <img src="{{ person.avatar }}" width="150px" href="/student/{{ person.id }}"></a></li>
+  <p> {{ person.name }} </p>
   </article>
 {% endfor %}
 
