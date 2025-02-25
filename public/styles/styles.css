@@ -5,6 +5,10 @@ body {
     background-position: 50% 0%;
 }
 
+ul li{
+    list-style-type: none;
+}
+
 .squadpage {
     display: flex;
     flex-direction: column;
@@ -108,7 +112,6 @@ body {
     }
 
     .student {
-        list-style-type: none;
         padding: 2em;
         width: 100%;
         display: flex;
@@ -233,7 +236,6 @@ main {
         padding: 2em 0em 0em 0em;
 
         li {
-            list-style-type: none;
 
             p {
                 display: flex;
