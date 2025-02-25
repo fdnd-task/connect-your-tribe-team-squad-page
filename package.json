@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/fdnd-task/connect-your-tribe-team-squad-page#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "express": "^5.0.1",
     "liquidjs": "^10.21.0"
   }
