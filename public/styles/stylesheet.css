@@ -54,54 +54,6 @@ body {
     font-weight: 800;
 }
 
-/* ---------------------------------- Classes kleuren -------------------------------- */
-
-/* Witte achtergrond */
-.primary-background {
-    background-color: var(--primary-background-color);
-}
-
-/* Zwarte achtergrond */
-.secondary-background {
-    background-color: var(--secondary-background-color);
-}
-
-/* Gele highlight */
-.primary-highlight {
-    background-color: var(--primary-highlight-color);
-}
-
-/* Roze highlight */
-.secondary-highlight {
-    background-color: var(--secondary-highlight-color);
-}
-
-/* Roze highlight */
-.third-highlight {
-    background-color: var(--third-highlight-color);
-}
-
-
-/* Zwarte tekst */
-.primary-tekst {
-    color: var(--primary-text-color);
-}
-
-/* Witte tekst */
-.secondary-tekst {
-    color: var(--secondary-text-color);
-}
-
-/* Rood error */
-.error-red {
-    background-color: var(--secondary-text-color);
-}
-
-/* Groen check */
-.check-green {
-    background-color: var(--error-color);
-}
-
 /* ---------------------------------- Tekst elementen -------------------------------- */
 
 h1,
@@ -229,13 +181,6 @@ a {
         border: 1px solid var(--secondary-background-color);
     }
 }
-
-/* .active {  niet in gebruik????
-    background-color: var(--secondary-background-color);
-    color: var(--secondary-text-color);
-    transition: ease-in-out 0.2s;
-    border: 1px solid var(--secondary-background-color);
-} */
 
 .github-link {
     align-self: baseline;
@@ -392,37 +337,3 @@ a {
         padding: 4em 4em 4em 4em;
     }
 }
-
-/* Width met padding onder */
-/* .width-btm {
-    padding: 0em 1em 3.5em 1em;
-
-    @media screen and (min-width: 920px) {
-        padding: 0em 3em 4.5em 3em;
-    }
-
-    @media screen and (min-width: 1120px) {
-        padding: 0em 7em 5em 7em;
-    }
-
-    @media screen and (min-width: 1600px) {
-        padding: 0em 4em 4em 4em;
-    }
-} */
-
-/* Width met padding boven */
-/* .width-top {
-    padding: 3.5em 1em 0em 1em;
-
-    @media screen and (min-width: 920px) {
-        padding: 4.5em 3em 0em 3em;
-    }
-
-    @media screen and (min-width: 1120px) {
-        padding: 5em 7em 0em 7em;
-    }
-
-    @media screen and (min-width: 1600px) {
-        padding: 4em 4em 0em 4em;
-    }
-} */
