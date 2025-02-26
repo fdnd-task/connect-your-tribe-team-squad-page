@@ -223,6 +223,20 @@ app.get('/logout', (request, response) => {
   // Redirect naar de login pagina
   response.redirect('/login');
 });
+// -- POST route: 
+// hier wordt eerst gekeken of er al een like status is voor de persoon. Zo niet, dan wordt deze op 0 gezet.
+// dan wordt de like status met 1 verhoogd met ++, en wordt de nieuwe status opgeslagen in het likes object.
+// vervolgens wordt de nieuwe like status geprint in de console.
+// tot slot wordt de gebruiker geredirect naar de homepage.
+app.post('/like', function (request, response) {
+   const personId = request.body.person_id;
+  if (!likes[personId]) {
+    likes[personId] = 0;  
+   }
+ likes[personId]++;
+   console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes`);  
+  response.redirect(303, '/');
+ });
 
 app.set('port', process.env.PORT || 8000)
 
