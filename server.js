@@ -10,21 +10,32 @@ const teamName = 'Hype';
 const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={%22_and%22:[{%22squads%22:{%22squad_id%22:{%22tribe%22:{%22name%22:%22FDND%20Jaar%201%22}}}},{%22squads%22:{%22squad_id%22:{%22cohort%22:%222425%22}}},{%22squads%22:{%22squad_id%22:{%22name%22:%221G%22}}}]}');
 const personResponseJSON = await personResponse.json();
 
-let likes = {}; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
+let likes = []; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
 
 const processedPeople = personResponseJSON.data.map((person) => {
   try {
+    const likedBy = person.custom
     const capitalizedParts = person.name
       .split(' ') // Split de naam in verschillende delen
       .filter(part => /^[A-Z]/.test(part)) // Test of de eerste letter een hoofdletter is
       .map(part => part.toLowerCase()); // Zet alle resterende letters naar lowercase
-    
+      console.log(likedBy)
+
+      if (likedBy.liked && Array.isArray(likedBy.liked)) {
+        console.log('bestaat')
+        likes = likedBy.liked
+      }
+
+      else {
+         console.log('bestaat niet')
+      }
+
     return {
       firstName: capitalizedParts[0],
       // Pak de eerste 2 letters van de achternaam
       processedName: capitalizedParts[1].slice(0, 2),
-      fullName: capitalizedParts[0] + capitalizedParts[1].slice(0, 2)
-      
+      fullName: capitalizedParts[0] + capitalizedParts[1].slice(0, 2),
+      likedArray: likedBy
     };
   } 
 
@@ -42,6 +53,7 @@ const processedPeople = personResponseJSON.data.map((person) => {
     };
   }
 });
+
 
 // console.log(processedPeople);
 // console.log(personResponseJSON.data);
@@ -232,13 +244,58 @@ app.get('/logout', (request, response) => {
 // dan wordt de like status met 1 verhoogd met ++, en wordt de nieuwe status opgeslagen in het likes object.
 // vervolgens wordt de nieuwe like status geprint in de console.
 // tot slot wordt de gebruiker geredirect naar de homepage.
-app.post('/like', function (request, response) {
-   const personId = request.body.person_id;
-  if (!likes[personId]) {
-    likes[personId] = 0;  
-   }
- likes[personId]++;
-   console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes gekregen van ${logged}`);  
+
+
+app.post('/like', async function (request, response) {
+  // TODO: remove when already exists
+  await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team Hype Likes"}`, {
+    method: 'POST',
+    body: JSON.stringify({
+      for: `Team Hype Likes`, 
+      text: request.body.person_id,
+      from: logged
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+  
+  // const customData = JSON.parse(likedPerson.custom);
+  // if (typeof customData.likes === 'undefined') customData.likes = [];
+   
+  // console.log(typeof customData, customData);
+
+  // if (customData.likes.includes(logged)) {
+  //     // check how to remove specific element from array
+  //     // customData.likes.splice(customData.liks.indexOf(logged), 1);
+  // } else {
+  //   customData.likes.push(logged);
+  // }
+
+  
+
+//    if(likedArray.includes(logged)){
+//     console.log('removing', logged);
+    
+    
+//     likedArray.filter(user => user === logged)
+//    } else likedArray.push(logged)
+//    likedPerson.custom.liked
+//    console.log(likedPerson.custom);
+   
+//   //  console.log(likedArray);
+
+
+//   if (!likes[personId]) {
+//     likes[personId] = 0;  
+//    }
+//  likes[personId]++;
+
+
+//  likedPerson.custom.liked = likedArray
+//  console.log(likedPerson.custom);
+ 
+  //  console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes gekregen van ${logged}`);  
   response.redirect(303, '/');
  });
 
