@@ -10,8 +10,8 @@ const teamName = 'Hype';
 const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={%22_and%22:[{%22squads%22:{%22squad_id%22:{%22tribe%22:{%22name%22:%22FDND%20Jaar%201%22}}}},{%22squads%22:{%22squad_id%22:{%22cohort%22:%222425%22}}},{%22squads%22:{%22squad_id%22:{%22name%22:%221G%22}}}]}');
 const personResponseJSON = await personResponse.json();
 
-let likes = []; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
-
+let personalLikes = []; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
+let totalLikes;
 const processedPeople = personResponseJSON.data.map((person) => {
   try {
     const likedBy = person.custom
@@ -101,6 +101,13 @@ const squadResponse = await fetch('https://fdnd.directus.app/items/squad?filter=
 const squadResponseJSON = await squadResponse.json()
 
 app.get('/', async function (request, response) {
+  // Haal likes op van de team database
+  const hypeLikes = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team Hype Likes"}`)
+  totalLikes = await hypeLikes.json();
+  const personalLikesArray = []
+  personalLikes = totalLikes.data.filter(like => (like.from, like.for));
+  }), 'personal');
+  
   // Haal berichten op voor het team
   const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team ${teamName}"}`);
   const messagesResponseJSON = await messagesResponse.json();
@@ -112,7 +119,7 @@ app.get('/', async function (request, response) {
     persons: personResponseJSON.data,
     squads: squadResponseJSON.data,
     messages: messagesResponseJSON.data,
-    likes: likes // -- likes object wordt meegegeven aan de template om de like status per persoon te tonen
+    likes: personalLikes.text // -- likes object wordt meegegeven aan de template om de like status per persoon te tonen
   });
 });
 
@@ -247,12 +254,26 @@ app.get('/logout', (request, response) => {
 
 
 app.post('/like', async function (request, response) {
-  // TODO: remove when already exists
+  let personId = request.body.person_id
+  // Data om te vergelijken
+  const compareData = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team Hype Likes"}`);
+  const compareJson = await compareData.json();
+  // vergelijking, als het bestaat, pak de id en delete gebaseerd hierop
+  const itemToDelete = compareJson.data.find(person => person.from === logged && person.text === personId)?.id;
+  if (itemToDelete) {
+    return await fetch(`https://fdnd.directus.app/items/messages/${itemToDelete}?filter={"for":"Team Hype Likes"}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      }
+    });
+  }
+  // like by default
   await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team Hype Likes"}`, {
     method: 'POST',
     body: JSON.stringify({
       for: `Team Hype Likes`, 
-      text: request.body.person_id,
+      text: personId,
       from: logged
     }),
     headers: {
@@ -260,42 +281,6 @@ app.post('/like', async function (request, response) {
     }
   });
   
-  // const customData = JSON.parse(likedPerson.custom);
-  // if (typeof customData.likes === 'undefined') customData.likes = [];
-   
-  // console.log(typeof customData, customData);
-
-  // if (customData.likes.includes(logged)) {
-  //     // check how to remove specific element from array
-  //     // customData.likes.splice(customData.liks.indexOf(logged), 1);
-  // } else {
-  //   customData.likes.push(logged);
-  // }
-
-  
-
-//    if(likedArray.includes(logged)){
-//     console.log('removing', logged);
-    
-    
-//     likedArray.filter(user => user === logged)
-//    } else likedArray.push(logged)
-//    likedPerson.custom.liked
-//    console.log(likedPerson.custom);
-   
-//   //  console.log(likedArray);
-
-
-//   if (!likes[personId]) {
-//     likes[personId] = 0;  
-//    }
-//  likes[personId]++;
-
-
-//  likedPerson.custom.liked = likedArray
-//  console.log(likedPerson.custom);
- 
-  //  console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes gekregen van ${logged}`);  
   response.redirect(303, '/');
  });
 
