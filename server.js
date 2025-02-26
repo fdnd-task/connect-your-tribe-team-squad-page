@@ -11,6 +11,7 @@ const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort
 const personResponseJSON = await personResponse.json();
 
 let likes = {}; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
+
 const processedPeople = personResponseJSON.data.map((person) => {
   try {
     const capitalizedParts = person.name
@@ -88,11 +89,15 @@ app.get('/', async function (request, response) {
   const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team ${teamName}"}`);
   const messagesResponseJSON = await messagesResponse.json();
   
+
+ // render de homepage met de opgehaalde data
   response.render('index.liquid', {
     teamName: teamName,
     persons: personResponseJSON.data,
     squads: squadResponseJSON.data,
     messages: messagesResponseJSON.data
+    messages: messagesResponseJSON.data,
+    likes: likes // -- likes object wordt meegegeven aan de template om de like status per persoon te tonen
   });
 });
 
