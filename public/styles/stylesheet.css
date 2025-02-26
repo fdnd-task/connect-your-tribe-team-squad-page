@@ -54,54 +54,6 @@ body {
     font-weight: 800;
 }
 
-/* ---------------------------------- Classes kleuren -------------------------------- */
-
-/* Witte achtergrond */
-.primary-background {
-    background-color: var(--primary-background-color);
-}
-
-/* Zwarte achtergrond */
-.secondary-background {
-    background-color: var(--secondary-background-color);
-}
-
-/* Gele highlight */
-.primary-highlight {
-    background-color: var(--primary-highlight-color);
-}
-
-/* Roze highlight */
-.secondary-highlight {
-    background-color: var(--secondary-highlight-color);
-}
-
-/* Roze highlight */
-.third-highlight {
-    background-color: var(--third-highlight-color);
-}
-
-
-/* Zwarte tekst */
-.primary-tekst {
-    color: var(--primary-text-color);
-}
-
-/* Witte tekst */
-.secondary-tekst {
-    color: var(--secondary-text-color);
-}
-
-/* Rood error */
-.error-red {
-    background-color: var(--secondary-text-color);
-}
-
-/* Groen check */
-.check-green {
-    background-color: var(--error-color);
-}
-
 /* ---------------------------------- Tekst elementen -------------------------------- */
 
 h1,
@@ -146,7 +98,6 @@ h6 {
     line-height: 118%;
 }
 
-/* Paragraaf */
 p {
     font-size: clamp(1rem, 1rem + 0vw, 1rem);
     line-height: 180%;
@@ -154,29 +105,13 @@ p {
     color: var(--primary-text-color);
 }
 
-/* ---------------------------------- Pricing elementen -------------------------------- */
-
-.price {
-    display: flex;
-    flex-direction: row;
-}
-
-.price-left {
-    font-size: 60px;
-}
-
-.price-right {
-    font-size: 30px;
-    translate: -10px -10px;
-}
-
-.price-left-small {
-    font-size: 36px;
-}
-
-.price-right-small {
-    font-size: 20px;
-    translate: -8px -5px;
+/* glass effect (later ff kijken voor custom props) */
+.glass {
+    background: rgba(255, 255, 255, 0.193);
+    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--small-rounded);
 }
 
 /* ---------------------------------- List elementen -------------------------------- */
@@ -220,23 +155,13 @@ a {
     }
 }
 
+
 /* Knop filters */
 .filter-link {
     align-self: baseline;
     font-family: var(--font-header);
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: var(--small-rounded);
-    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
     color: var(--primary-text-color);
     padding: 1em 1.6em;
-    border: 1px solid var(--secondary-background-color);
-    border-radius: var(--small-rounded);
     text-decoration: none;
     gap: 0.5em;
     display: inline-flex;
@@ -258,79 +183,20 @@ a {
     }
 }
 
-.active {
-    background-color: var(--secondary-background-color);
-    color: var(--secondary-text-color);
-    transition: ease-in-out 0.2s;
-    border: 1px solid var(--secondary-background-color);
-}
-
 .github-link {
     align-self: baseline;
     font-family: var(--font-header);
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: var(--small-rounded);
-    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
     color: var(--secondary-text-color);
     padding: 1em 1.6em;
     border: 1px solid var(--secondary-background-color);
+    border-radius: var(--small-rounded);
     text-decoration: none;
-    gap: 0.5em;
     display: inline-flex;
     transition: 0.2s ease-in-out;
     font-size: clamp(1rem, 1rem + 0vw, 1rem);
 
     svg {
-        fill: #fff;
-    }
-
-    &:hover {
-        background-color: var(--secondary-background-color);
-        color: var(--primary-text-color);
-        transition: ease-in-out 0.2s;
-        border: 1px solid var(--secondary-background-color);
-    }
-
-    &:hover svg {
-        fill: var(--primary-background-color);
-    }
-
-    &:active {
-        background-color: var(--primary-highlight-color);
-        color: var(--primary-text-color);
-        transition: ease-in-out 0.2s;
-    }
-}
-
-.github-link {
-    align-self: baseline;
-    font-family: var(--font-header);
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: var(--small-rounded);
-    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    color: var(--secondary-text-color);
-    padding: 1em 1.6em;
-    border: 1px solid var(--secondary-background-color);
-    text-decoration: none;
-    gap: 0.5em;
-    display: inline-flex;
-    transition: 0.2s ease-in-out;
-    font-size: clamp(1rem, 1rem + 0vw, 1rem);
-
-    svg {
-        fill: #fff;
+        fill: var(--secondary-background-color);
     }
 
     &:hover {
@@ -355,15 +221,6 @@ a {
 .back-link {
     align-self: baseline;
     font-family: var(--font-header);
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: var(--small-rounded);
-    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
     color: var(--primary-text-color);
     padding: 1em 1.6em;
     border: 1px solid var(--secondary-background-color);
@@ -401,15 +258,6 @@ a {
 .arrow-right-link {
     align-self: baseline;
     font-family: var(--font-header);
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: var(--small-rounded);
-    box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
     color: var(--secondary-text-color);
     padding: 1em 1.6em;
     border: 1px solid var(--secondary-background-color);
@@ -457,14 +305,6 @@ a {
     }
 
     &:hover {
-        /* Background glass effect */
-        background: rgba(255, 255, 255, 0.193);
-        border-radius: var(--small-rounded);
-        box-shadow: 0 4px 30px rgba(108, 9, 9, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-
         color: var(--primary-text-color);
         transition: ease-in-out 0.2s;
         border: 1px solid var(--secondary-background-color);
@@ -496,39 +336,5 @@ a {
 
     @media screen and (min-width: 1600px) {
         padding: 4em 4em 4em 4em;
-    }
-}
-
-/* Width met padding onder */
-.width-btm {
-    padding: 0em 1em 3.5em 1em;
-
-    @media screen and (min-width: 920px) {
-        padding: 0em 3em 4.5em 3em;
-    }
-
-    @media screen and (min-width: 1120px) {
-        padding: 0em 7em 5em 7em;
-    }
-
-    @media screen and (min-width: 1600px) {
-        padding: 0em 4em 4em 4em;
-    }
-}
-
-/* Width met padding boven */
-.width-top {
-    padding: 3.5em 1em 0em 1em;
-
-    @media screen and (min-width: 920px) {
-        padding: 4.5em 3em 0em 3em;
-    }
-
-    @media screen and (min-width: 1120px) {
-        padding: 5em 7em 0em 7em;
-    }
-
-    @media screen and (min-width: 1600px) {
-        padding: 4em 4em 0em 4em;
     }
 }

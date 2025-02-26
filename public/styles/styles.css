@@ -40,10 +40,6 @@ ul li {
     text-align: center;
   }
 
-  .label-filter {
-    padding: 0em 0em 1em 0em;
-  }
-
   .dropdown {
     padding: 0em 0em 3em 0em;
 
@@ -102,11 +98,6 @@ ul li {
   }
 }
 
-.label {
-  display: flex;
-  padding: 2.5em 0em 0em 0em;
-}
-
 .filter-bookgenre {
   display: flex;
   flex-direction: row;
@@ -138,14 +129,6 @@ ul li {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-
-    /* Background glass effect */
-    background: rgba(255, 255, 255, 0.193);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
 
     transition: 0.2s ease-in-out;
 
@@ -273,6 +256,7 @@ main {
     border: none;
     width: 5em;
 }
+
 .like-counter {
     color: white;
     font-weight: bold;
