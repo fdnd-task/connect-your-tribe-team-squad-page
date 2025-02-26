@@ -16,6 +16,7 @@ section{
 body:has(:only-child):has(> form:only-child) {
   display: grid;
   place-items: center;
+  min-height: 100vh;
 }
 
 body {
