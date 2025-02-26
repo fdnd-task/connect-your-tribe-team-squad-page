@@ -95,7 +95,6 @@ app.get('/', async function (request, response) {
     teamName: teamName,
     persons: personResponseJSON.data,
     squads: squadResponseJSON.data,
-    messages: messagesResponseJSON.data
     messages: messagesResponseJSON.data,
     likes: likes // -- likes object wordt meegegeven aan de template om de like status per persoon te tonen
   });
