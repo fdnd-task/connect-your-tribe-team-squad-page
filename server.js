@@ -106,7 +106,6 @@ app.get('/', async function (request, response) {
   totalLikes = await hypeLikes.json();
   const personalLikesArray = []
   personalLikes = totalLikes.data.filter(like => (like.from, like.for));
-  }), 'personal');
   
   // Haal berichten op voor het team
   const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"Team ${teamName}"}`);
