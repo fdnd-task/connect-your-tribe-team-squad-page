@@ -20,11 +20,14 @@ const processedPeople = personResponseJSON.data.map((person) => {
       .map(part => part.toLowerCase()); // Zet alle resterende letters naar lowercase
     
     return {
-      first_name: capitalizedParts[0],
+      firstName: capitalizedParts[0],
       // Pak de eerste 2 letters van de achternaam
-      processedName: capitalizedParts[1].slice(0, 2)
+      processedName: capitalizedParts[1].slice(0, 2),
+      fullName: capitalizedParts[0] + capitalizedParts[1].slice(0, 2)
+      
     };
   } 
+
   // In het geval dat een naam niet correct is krijg je er een error over en wordt er een lege string gereturned
   // Zorgt ervoor dat de loop niet stopt
   catch (error) {
@@ -34,11 +37,12 @@ const processedPeople = personResponseJSON.data.map((person) => {
       name: person?.name || 'No name found'
     });
     return {
-      first_name: '',
+      firstName: '',
       processedName: ''
     };
   }
 });
+
 // console.log(processedPeople);
 // console.log(personResponseJSON.data);
 const app = express()
@@ -100,6 +104,7 @@ app.get('/', async function (request, response) {
   });
 });
 
+
 //route aanmaken voor studentpagina
 app.get('/student/:id', async function (request, response) {
   const personDetailResponse = await fetch(`https://fdnd.directus.app/items/person/${request.params.id}`);
@@ -155,7 +160,7 @@ app.post('/login', async function (request, response) {
   
   // Match de input met een van de personen in de processedPeople array
   const validUser = processedPeople.find(person => {
-    const validLogin = `${person.first_name?.toLowerCase()}${person.processedName}`;
+    const validLogin = `${person.fullName}`;
     return validLogin === normalizedInput;
   });
   
@@ -233,7 +238,7 @@ app.post('/like', function (request, response) {
     likes[personId] = 0;  
    }
  likes[personId]++;
-   console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes`);  
+   console.log(`Persoon ${personId} heeft nu ${likes[personId]} likes gekregen van ${logged}`);  
   response.redirect(303, '/');
  });
 
