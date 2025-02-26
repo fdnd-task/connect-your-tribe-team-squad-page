@@ -10,6 +10,7 @@ const teamName = 'Hype';
 const personResponse = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={%22_and%22:[{%22squads%22:{%22squad_id%22:{%22tribe%22:{%22name%22:%22FDND%20Jaar%201%22}}}},{%22squads%22:{%22squad_id%22:{%22cohort%22:%222425%22}}},{%22squads%22:{%22squad_id%22:{%22name%22:%221G%22}}}]}');
 const personResponseJSON = await personResponse.json();
 
+let likes = {}; // -- likes object wordt aangemaakt om de like status per persoon bij te houden
 const processedPeople = personResponseJSON.data.map((person) => {
   try {
     const capitalizedParts = person.name
