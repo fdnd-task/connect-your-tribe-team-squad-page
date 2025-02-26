@@ -1,8 +1,13 @@
-{% render 'partials/head.liquid' %}
-    <form method="post" action="/login" class="primary-tekst">
-        <label>Hoe heet je?
-            <input type="text" name="naam">
-        </label>
-        <button type="submit">submit</button>
-    </form>
-{% render 'partials/foot.liquid', login = true %}
+{% render 'partials/head.liquid'
+  , login = true; %}
+<form
+  method="post"
+  action="/login"
+  class="primary-tekst">
+  <label>Hoe heet je?
+    <input type="text" name="naam">
+  </label>
+  <button type="submit">submit</button>
+</form>
+{% render 'partials/foot.liquid'
+  , login = true %}

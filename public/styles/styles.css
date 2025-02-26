@@ -12,6 +12,7 @@ html {
 section{
   position: relative;
 }
+
 body:has(:only-child):has(> form:only-child) {
   display: grid;
   place-items: center;

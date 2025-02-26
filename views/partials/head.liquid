@@ -11,5 +11,6 @@
 </head>
 
 <body>
-
+{% unless login %}
 {% render 'partials/logout.liquid' %}
+{% endunless %}
