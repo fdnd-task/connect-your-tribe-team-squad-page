@@ -95,6 +95,40 @@ app.get('/', async function (request, response) {
   });
 });
 
+//route aanmaken voor studentpagina
+app.get('/student/:id', async function (request, response) {
+  const personDetailResponse = await fetch(`https://fdnd.directus.app/items/person/${request.params.id}`);
+  const personDetailResponseJSON = await personDetailResponse.json();
+  
+  // Haal berichten op die specifiek voor deze student bedoeld zijn
+  const messagesResponse = await fetch(`https://fdnd.directus.app/items/messages/?filter={"for":"${request.params.id}"}`);
+  const messagesResponseJSON = await messagesResponse.json();
+
+  response.render('student.liquid', {
+    person: personDetailResponseJSON.data,
+    squads: squadResponseJSON.data,
+    messages: messagesResponseJSON.data // Stuur alleen berichten voor deze student
+  });
+});
+
+
+//posten voor op de studentenpagina
+app.post('/student/:id', async function (request, response) {
+  await fetch('https://fdnd.directus.app/items/messages/', {
+    method: 'POST',
+    body: JSON.stringify({
+      for: request.params.id, 
+      text: request.body.message
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  response.redirect(303, `/student/${request.params.id}`);
+});
+
+
 app.get('/login', async function (request, response) {
   if (logged) return response.redirect(303, "/");
 
@@ -163,9 +197,8 @@ app.post('/logger', async function (request, response) {
   await fetch('https://fdnd.directus.app/items/messages/', {
     method: 'POST',
     body: JSON.stringify({
-      for: `Team ${teamName}`,
-      from: request.body.from,
-      text: request.body.text
+      for: request.params.id, 
+      text: request.body.message
     }),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
@@ -196,10 +229,3 @@ if (teamName == '') {
 }
 
 
-app.get('/student/:id', async function (request, response) {
-
-  const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/' + request.params.id)
-  const personDetailResponseJSON = await personDetailResponse.json()
-  
-  response.render('student.liquid', {person: personDetailResponseJSON.data, squads: squadResponseJSON.data})
-})

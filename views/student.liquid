@@ -11,18 +11,49 @@
             Back</a>
     </div>
 
-        <img class="profile" src="{{ person.avatar | default: '/assets/default-user-avatar.svg' }}" alt="">
-        <h1>{{ person.name }}</h1>
-        <p class="introductie">{{ person.bio | default: "Eerstejaars FDND student aan de HVA." | truncatewords: 20 }}</p>
+    <img class="profile" src="{{ person.avatar | default: '/assets/default-user-avatar.svg' }}" alt="">
+    <h1>{{ person.name }}</h1>
+    <p class="introductie">{{ person.bio | default: "Eerstejaars FDND student aan de HVA." | truncatewords: 20 }}</p>
 
-        <ul class="meer-info">
-            <li><p><img class="label" src="/assets/books-icon.svg" alt="">{{ person.fav_book_genre | default: "Alle genres" }}</p></li>
-            <li><p><img class="label" src="/assets/icons.svg" alt="">{{ person.fav_emoji| default: "Favoriete emoji" }}</p></li>
-            <li><p><img class="label" src="/assets/heart.svg" alt="">{{ person.fav_hobby | default: "Favoriete Hobby" }}</p></li>
-            <li><p><img class="label" src="/assets/paw.svg" alt="">{{ person.fav_animal | default: "Favoriete dier" }}</p></li>
-            <li><p><img class="label" src="/assets/burger-soda.svg" alt="">{{ person.fav_kitchen | default: "Favoriete eten" }}</p></li>
-            <li><p><img class="label" src="/assets/plane-departure.svg" alt="">{{ person.fav_country | default: "Favoriete land" }}</p></li>
-        </ul>
+    <ul class="meer-info">
+        <li>
+            <p><img class="label" src="/assets/books-icon.svg" alt="">{{ person.fav_book_genre | default: "Allegenres"}}</p>
+        </li>
+        <li>
+            <p><img class="label" src="/assets/icons.svg" alt="">{{ person.fav_emoji| default: "Favoriete emoji" }}</p>
+        </li>
+        <li>
+            <p><img class="label" src="/assets/heart.svg" alt="">{{ person.fav_hobby | default: "Favoriete Hobby" }}</p>
+        </li>
+        <li>
+            <p><img class="label" src="/assets/paw.svg" alt="">{{ person.fav_animal | default: "Favoriete dier" }}</p>
+        </li>
+        <li>
+            <p><img class="label" src="/assets/burger-soda.svg" alt="">{{ person.fav_kitchen | default: "Favorieteeten"}}</p>
+        </li>
+        <li>
+            <p><img class="label" src="/assets/plane-departure.svg" alt="">{{ person.fav_country | default:"Favorieteland" }}</p>
+        </li>
+    </ul>
+
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.text }}</li>
+        {% else %}
+            <li>Er zijn nog geen berichten. Plaats iets leuks!</li>
+        {% endfor %}
+    </ul>
+
+    
+
+    <form method="POST" action="/student/{{ person.id }}">
+
+        <label for="">typ iets leuks
+            <textarea name="message" id="" required></textarea>
+            <button method="submit">post bericht</button>
+        </label>
+
+    </form>
 </main>
 
 {% render 'partials/foot.liquid', squads: squads %}
