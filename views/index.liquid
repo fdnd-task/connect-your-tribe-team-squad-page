@@ -3,9 +3,9 @@
 <h2>Huidige berichten</h2>
 
 {% for message in messages %}
-<p>{{ message.from }}: {{ message.text }} @{{ message.created | date: '%d-%m-%Y %H:%M' }}</p>
+  <p>{{ message.from }}: {{ message.text }} @{{ message.created | date: '%d-%m-%Y %H:%M' }}</p>
 {% else %}
-<p>Er zijn nog geen berichten voor dit team.</p>
+  <p>Er zijn nog geen berichten voor dit team.</p>
 {% endfor %}
 
 <h2>Voeg een bericht toe</h2>
