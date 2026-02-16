@@ -4,7 +4,7 @@ import { Liquid } from 'liquidjs';
 
 
 // Vul hier jullie team naam in
-const teamName = '';
+const teamName = 'Cheer';
 
 
 const app = express()
@@ -25,7 +25,7 @@ app.get('/', async function (request, response) {
   // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
   // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
   const params = {
-    'filter[for]': `Team ${teamName}`,
+    'filter[for]': `Team ${teamName} / `,
   }
 
   // Maak hiermee de URL aan, zoals we dat ook in de browser deden
@@ -63,7 +63,7 @@ app.post('/', async function (request, response) {
     // Geef de body mee als JSON string
     body: JSON.stringify({
       // Dit is zodat we ons bericht straks weer terug kunnen vinden met ons filter
-      for: `Team ${teamName}`,
+      for: `Team ${teamName} / `,
       // En dit zijn onze formuliervelden
       from: request.body.from,
       text: request.body.text
