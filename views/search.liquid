@@ -1,10 +1,11 @@
-<form action="/search" method="GET">
-    <input type="search" name="q" placeholder="Zoek op naam, favoriete dier, woonplaats etc...">
-    <button type="submit">Zoek</button>
-</form>
+{% render 'partials/head.liquid', title: 'Homepage' %}
+
+<main>
 {% for person in persons %}
     <p>{{ person.name }}</p>
 {% endfor %}
 {% if isSearch %}
     <p>je hebt gezocht op: {{ person.name }}</p>
 {% endif %}
+
+</main>
