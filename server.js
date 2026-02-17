@@ -4,6 +4,7 @@ import { Liquid } from 'liquidjs';
 
 
 // Vul hier jullie team naam in
+
 // const teamName = 'Cheer';
 const personName = 274;
 
