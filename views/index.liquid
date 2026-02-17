@@ -1,6 +1,27 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
 
 <main>
+
+<section class="hero">
+
+  <h1>
+    <span>S</span>
+    <span>q</span>
+    <span>o</span>
+    <span>g</span>
+    <span>l</span>
+    <span>e</span>
+  </h1>
+{% render 'partials/searchbar.liquid'%}
+  <ul>
+    <li><a href="#">Iedereen</a></li>
+    <li><a href="#">Random</a></li>
+  </ul>
+</section>
+
+
+
+
 <section class="start">
 <p>Zet 'm op team {{ teamName }}!</h1>
 
@@ -24,19 +45,6 @@
   </label>
   <button type="submit">Verstuur</button>
 </form>
-
-
-
-{% for person in persons %}
-  <p>{{ person.name }}</p>
-{% endfor %}
-</section>
-
-<section>
-  <form action="/search" method="GET">
-      <input type="search" name="q" placeholder="Zoek op naam, favoriete dier, woonplaats, haarkleur, favoriete tag">
-      <button type="submit">Zoek</button>
-  </form>
 </section>
 
 </main>
