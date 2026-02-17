@@ -4,7 +4,9 @@ import { Liquid } from 'liquidjs';
 
 
 // Vul hier jullie team naam in
-const teamName = '';
+
+// const teamName = 'Cheer';
+const personName = 274;
 
 
 const app = express()
@@ -12,11 +14,11 @@ const app = express()
 app.use(express.static('public'))
 
 const engine = new Liquid();
-app.engine('liquid', engine.express()); 
+app.engine('liquid', engine.express());
 
 app.set('views', './views')
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 app.get('/', async function (request, response) {
@@ -25,29 +27,33 @@ app.get('/', async function (request, response) {
   // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
   // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
   const params = {
-    'filter[for]': `Team ${teamName}`,
+    'filter[for]': `Person ${personName}`,
   }
 
   // Maak hiermee de URL aan, zoals we dat ook in de browser deden
   const apiURL = 'https://fdnd.directus.app/items/messages?' + new URLSearchParams(params)
-
-  // Laat eventueel zien wat de filter URL is
-  // (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
-  // console.log('API URL voor messages:', apiURL)
-
-  // Haal daarna de messages data op
   const messagesResponse = await fetch(apiURL)
-
-  // Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
   const messagesResponseJSON = await messagesResponse.json()
 
-  // Controleer eventueel de data in je console
-  // console.log(messagesResponseJSON)
+  console.log('API URL voor messages:', apiURL)
+
+
+  const paramsPerson = {
+    'sort': 'name',
+    'fields': '*,squads.*',
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526'
+  }
+
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(paramsPerson))
+  const personResponseJSON = await personResponse.json()
+
 
   // En render de view met de messages
   response.render('index.liquid', {
-    teamName: teamName,
-    messages: messagesResponseJSON.data
+    personName: personName,
+    messages: messagesResponseJSON.data,
+    persons: personResponseJSON.data
   })
 })
 
@@ -63,7 +69,7 @@ app.post('/', async function (request, response) {
     // Geef de body mee als JSON string
     body: JSON.stringify({
       // Dit is zodat we ons bericht straks weer terug kunnen vinden met ons filter
-      for: `Team ${teamName}`,
+      for: `Person ${personName}`,
       // En dit zijn onze formuliervelden
       from: request.body.from,
       text: request.body.text
@@ -83,8 +89,8 @@ app.post('/', async function (request, response) {
 
 app.set('port', process.env.PORT || 8000)
 
-if (teamName == 'Cheer') {
-  console.log('Voeg eerst de naam van jullie team in de code toe.')
+if (personName == '') {
+  console.log('Voeg eerst de naam van jullie persoon in de code toe.')
 } else {
   app.listen(app.get('port'), function () {
     console.log(`Application started on http://localhost:${app.get('port')}`)

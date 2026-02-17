@@ -20,3 +20,9 @@
   </label>
   <button type="submit">Verstuur</button>
 </form>
+
+
+
+{% for person in persons %}
+  <h1>{{ person.name }}</h1>
+{% endfor %}
