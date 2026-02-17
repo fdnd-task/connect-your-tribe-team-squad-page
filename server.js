@@ -90,7 +90,7 @@ app.post('/', async function (request, response) {
 app.set('port', process.env.PORT || 8000)
 
 if (personName == '') {
-  console.log('Voeg eerst de naam van jullie team in de code toe.')
+  console.log('Voeg eerst de naam van jullie persoon in de code toe.')
 } else {
   app.listen(app.get('port'), function () {
     console.log(`Application started on http://localhost:${app.get('port')}`)
