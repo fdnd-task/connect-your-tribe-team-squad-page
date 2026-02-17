@@ -86,6 +86,42 @@ app.post('/', async function (request, response) {
   response.redirect(303, '/')
 })
 
+app.get('/studenten', async function (request, response) {
+
+  const q = request.query.search || '' // kijken of er iets in de zoekbalk staat
+  const isSearch = q.length > 0 //true als er iets gezocht is en false als de zoekbalk leeg id
+
+
+  const params = {
+    'sort': 'name',
+    'fields': '*',
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526',
+    'limit': '100'
+
+  }
+ 
+// Alleen zoekfilter toevoegen als er een zoekterm is
+ // Als er gezocht wordt, voeg dan een naam-filter toe
+// _icontains = zoekt hoofdletterongevoelig
+  if (isSearch) {
+    params['filter[name][_icontains]'] = q   
+  }
+
+  const personResponse = await fetch(
+    'https://fdnd.directus.app/items/person?' + new URLSearchParams(params)
+  )
+
+  const personResponseJSON = await personResponse.json()
+
+  response.render('search.liquid', {
+    query: q,
+    persons: personResponseJSON.data,
+    isSearch: isSearch // true/false, voor de if in liquid
+  })
+
+})
+
 
 app.set('port', process.env.PORT || 8000)
 
