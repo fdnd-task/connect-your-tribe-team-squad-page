@@ -1,4 +1,8 @@
-<h1>Zet 'm op team {{ teamName }}!</h1>
+{% render 'partials/head.liquid', title: 'Homepage' %}
+
+<main>
+<section class="start">
+<p>Zet 'm op team {{ teamName }}!</h1>
 
 <h2>Huidige berichten</h2>
 
@@ -24,5 +28,15 @@
 
 
 {% for person in persons %}
-  <h1>{{ person.name }}</h1>
+  <p>{{ person.name }}</p>
 {% endfor %}
+</section>
+
+<section>
+  <form action="/search" method="GET">
+      <input type="search" name="q" placeholder="Zoek op naam, favoriete dier, woonplaats, haarkleur, favoriete tag">
+      <button type="submit">Zoek</button>
+  </form>
+</section>
+
+</main>
