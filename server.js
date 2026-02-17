@@ -26,26 +26,26 @@ app.get('/', async function (request, response) {
   // Filter eerst de berichten die je wilt zien, net als bij personen
   // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
   // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
-  const params = {
+  const paramsMessages = {
     'filter[for]': `Person ${personName}`,
   }
 
   // Maak hiermee de URL aan, zoals we dat ook in de browser deden
-  const apiURL = 'https://fdnd.directus.app/items/messages?' + new URLSearchParams(params)
+  const apiURL = 'https://fdnd.directus.app/items/messages?' + new URLSearchParams(paramsMessages)
   const messagesResponse = await fetch(apiURL)
   const messagesResponseJSON = await messagesResponse.json()
 
   console.log('API URL voor messages:', apiURL)
 
 
-  const paramsPerson = {
+  const paramsPersons = {
     'sort': 'name',
     'fields': '*,squads.*',
     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
     'filter[squads][squad_id][cohort]': '2526'
   }
 
-  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(paramsPerson))
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(paramsPersons))
   const personResponseJSON = await personResponse.json()
 
 
@@ -55,6 +55,44 @@ app.get('/', async function (request, response) {
     messages: messagesResponseJSON.data,
     persons: personResponseJSON.data
   })
+})
+
+app.get('/search', async function (request, response) {
+  const q = request.query.q || "";
+  const isSearch = !!request.query.q
+
+  console.log(q)
+
+  const params = {
+    sort: 'name',
+    fields: '*,squads.*',
+    filter: JSON.stringify({
+    _and: [
+      {
+        _or: [
+          { name: { _icontains: `${q}` } },
+          { fav_animal: { _icontains: `${q}` } },
+          { fav_tag: { _icontains: `${q}` } },
+          { residency: { _icontains: `${q}` } },
+          { hair_color: { _icontains: `${q}` } }
+        ]
+      },
+      {
+        squads: {
+          squad_id: {
+            tribe: { name: { _eq: 'FDND Jaar 1' } },
+            cohort: { _eq: '2526' }
+          }
+        }
+      }
+    ]
+  })
+  };
+
+  const personResponse = await fetch(`https://fdnd.directus.app/items/person?` + new URLSearchParams(params))
+  const personResponseJSON = await personResponse.json()
+
+  response.render('search.liquid', { query: q, persons: personResponseJSON.data, isSearch: isSearch });
 })
 
 app.post('/', async function (request, response) {
@@ -96,3 +134,4 @@ if (personName == '') {
     console.log(`Application started on http://localhost:${app.get('port')}`)
   })
 }
+
