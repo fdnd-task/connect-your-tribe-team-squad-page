@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+html {
+
+    @media (prefers-reduced-motion:no-preference) {
+        scroll-behavior: smooth;
+    }
+
+}
+
+body {
+    min-height: 100vh;
+    background-image: url('background2.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+
+    padding-inline: 1rem;
+    position: relative;
+    font-family: 'Western', serif;
+    overflow-x: hidden;
+    align-content: center;
+
+    a,
+    details {
+        cursor: url("gun.png"), pointer;
+
+    }
+
+}
+
+/*--------------------- index.liquid--------------------------------- */
+
+
+a.title {
+    color: #ebcfa3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5cqi;
+    font-weight: 900;
+    height: 8cqi;
+    transition: all 0.6s;
+    background-image: url("woodboard.png");
+    background-repeat: no-repeat;
+    background-size: 40cqi 15cqi;
+    background-position: 50% 50%;
+    text-decoration: none;
+    pointer-events: none;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+
+
+h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    text-align: center;
+}
+
+.filters{
+display: flex;
+flex-direction: column;
+
+select{
+    width: 100%;
+}}
+
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    gap: clamp(2rem, 4vw, 2rem);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    max-width: 1400px;
+    margin: auto;
+
+}
+
+ul li a {
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    transition: transform 0.6s;
+    color: #3d2817;
+    font-weight: bold;
+      width: 100%; /* ← Voeg dit toe */
+    container-type: inline-size;
+
+    &:hover {
+        transform: scale(1.05);
+        animation: wave .8s;
+    }
+
+    &:hover .poster {
+        animation: glow .8s;
+    }
+
+    &:hover .mugshot {
+        animation: mugshotWave .8s;
+    }
+
+    &:hover .name,
+    &:hover .bounty {
+        animation: textBounce .8s;
+    }
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scale(1.05) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.08) rotate(4deg);
+    }
+
+    75% {
+        transform: scale(1.1) rotate(-4deg);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes mugshotWave {
+
+    0%,
+    100% {
+        transform: translateY(-30px) scale(1);
+    }
+
+    30% {
+        transform: translateY(-35px) scale(1.1);
+    }
+
+    60% {
+        transform: translateY(-28px) scale(0.97);
+    }
+}
+
+@keyframes textBounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px) scale(1.1);
+    }
+}
+
+.poster {
+    width: 100%;
+    z-index: 1;
+    box-shadow: .1em .1em .3em #0006;
+
+    pointer-events: none;
+}
+
+.mugshot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateY(-38px);
+    clip-path: inset(10% 8% 10% 8%);
+    z-index: 0;
+    filter: sepia(1) contrast(.5) saturate(.8) hue-rotate(-10deg) blur(.5px);
+    transition: .5s;
+
+    &:hover {
+        filter: sepia(0);
+    }
+}
+
+.name {
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: 'Western', serif;
+    font-size: 6cqi;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.bounty {
+    font-family: 'Western', serif;
+    position: absolute;
+    z-index: 2;
+    top: 83%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10cqi;
+}
+
+/*--------------------- student.liquid--------------------------------- */
+
+
+a.woodButton{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 900;
+    color: #583f03;
+}
+
+.d-mugshot {
+    position: absolute;
+    top: 24.5%;
+    left: 52%;
+    aspect-ratio: 1/1;
+    width: 45%;
+    outline: 1.8cqi solid #583f03;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+
+.d-poster {
+    box-shadow: 0 0 1em 1em #0006;
+    position: relative;
+    aspect-ratio: 2/3;
+    width: 65%;
+    margin: auto;
+    background-image: url('/detailPoster.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #3d2817;
+    font-weight: 600;
+    max-width: 1000px;
+    container-type: size;
+    margin-block: 5rem;
+
+    .d-name {
+        font-size: 4.5cqi;
+        position: absolute;
+        top: 23.2%;
+        left: 5%;
+    }
+
+    .d-nickname {
+        font-size: 5cqi;
+        position: absolute;
+        top: 26.9%;
+        left: 5%;
+    }
+
+    .d-github {
+        font-size: 5cqi;
+        position: absolute;
+        top: 30.9%;
+        left: 5%;
+    }
+
+    .d-hobby {
+        font-size: 5cqi;
+        position: absolute;
+        top: 34.9%;
+        left: 5%;
+    }
+
+    .d-emoji {
+        font-size: 5cqi;
+        position: absolute;
+        top: 38%;
+        left: 5%;
+    }
+
+    .d-season {
+        font-size: 5cqi;
+        position: absolute;
+        top: 43%;
+        left: 5%;
+    }
+
+    .d-animal {
+        font-size: 5cqi;
+        position: absolute;
+        top: 47%;
+        left: 5%;
+    }
+
+    .d-movie {
+        font-size: 5cqi;
+        position: absolute;
+        top: 50.9%;
+        left: 5%;
+        width: 50cqi;
+    }
+
+    .d-bio {
+        font-size: 3cqi;
+        position: absolute;
+        top: 61.5%;
+        left: 7%;
+        line-height: 7.2cqi;
+        width: 85%;
+    }
+
+    .d-profilecard {
+        font-size: 6cqi;
+        font-weight: 700;
+        position: absolute;
+        top: 85.2%;
+        left: 32.5%;
+
+        a {
+            text-decoration: none;
+            color: #3d2817;
+
+        }
+
+    }
+
+
+    .d-bounty {
+        position: absolute;
+        top: 57%;
+        left: 57%;
+        font-size: 6cqi;
+        font-weight: 700;
+
+    }
+}
+
+
+@media (max-width: 900px) {
+    .d-poster {
+        width: 100%;
+        aspect-ratio: 2/3;
+    }
+}
