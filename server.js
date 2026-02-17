@@ -132,7 +132,7 @@ app.get('/studenten', async function (request, response) {
 
   const params = {
     'sort': 'name',
-    'fields': '*',
+    'fields': '*,squads.*',
     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
     'filter[squads][squad_id][cohort]': '2526',
     'limit': '100'
@@ -152,7 +152,7 @@ app.get('/studenten', async function (request, response) {
 
   const personResponseJSON = await personResponse.json()
 
-  response.render('search.liquid', {
+  response.render('artikelen.liquid', {
     query: q,
     persons: personResponseJSON.data,
     isSearch: isSearch // true/false, voor de if in liquid
