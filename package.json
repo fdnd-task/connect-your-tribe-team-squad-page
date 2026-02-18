@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/fdnd-task/connect-your-tribe-team-squad-page#readme",
   "dependencies": {
     "express": "^5.0.1",
-    "liquidjs": "^10.21.0"
+    "liquidjs": "^10.21.0",
+    "nodemon": "^3.1.11"
   }
 }
