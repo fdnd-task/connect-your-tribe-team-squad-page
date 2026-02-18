@@ -1,4 +1,29 @@
-<h1>Zet 'm op team {{ teamName }}!</h1>
+{% render 'partials/head.liquid', title: 'Homepage' %}
+
+<main>
+
+<section class="hero">
+
+  <h1>
+    <span>S</span>
+    <span>q</span>
+    <span>o</span>
+    <span>g</span>
+    <span>l</span>
+    <span>e</span>
+  </h1>
+{% render 'partials/searchbar.liquid'%}
+  <ul>
+    <li><a href="#">Iedereen</a></li>
+    <li><a href="#">Random</a></li>
+  </ul>
+</section>
+
+
+
+
+<section class="start">
+<p>Zet 'm op team {{ teamName }}!</h1>
 
 <h2>Huidige berichten</h2>
 
@@ -20,9 +45,6 @@
   </label>
   <button type="submit">Verstuur</button>
 </form>
+</section>
 
-
-
-{% for person in persons %}
-  <h1>{{ person.name }}</h1>
-{% endfor %}
+</main>
