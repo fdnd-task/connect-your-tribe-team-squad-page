@@ -115,8 +115,9 @@ app.get('/random', async function (request, response) {
   const randomIndex = Math.floor(Math.random() * persons.length)
   // Met die index kiezen we een random persoon uit de lijst 
   const randomPerson = persons[randomIndex]
+  console.log(randomPerson)
   
-  response.render('random.liquid', {
+  response.render('detailperson.liquid', {
     person: randomPerson
   })
 })
