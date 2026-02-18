@@ -71,11 +71,11 @@ ul {
 
 /* iedereen page styling */
 
+
 .search-results {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .results-count {
@@ -88,7 +88,6 @@ ul {
     list-style: none;
     padding: 0;
     max-width: 760px;
-    width: 100%;
 }
 
 .student-item {
@@ -97,7 +96,7 @@ ul {
     display: grid;
     grid-template-columns: 50px 1fr auto;
     grid-template-rows: auto auto auto;
-    gap: 0.5rem 0.75rem;
+    gap: 0.5rem 1rem;
     align-items: start;
 }
 
@@ -124,10 +123,6 @@ ul {
     grid-row: 1;
     grid-column: 3;
     transition: color 0.2s;
-
-    &:hover{
-        color: #007bff;    
-    }
 }
 
 .student-bio {
