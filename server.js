@@ -73,7 +73,7 @@ app.get('/random', async function (request, response) {
   const personResponseJSON = await personResponse.json()
 
   const persons = personResponseJSON.data
-  // Kiest een random index op basis van het aantal personen
+  // Kies een random index op basis van het aantal personen
   const randomIndex = Math.floor(Math.random() * persons.length)
   // Met die index kiezen we een random persoon uit de lijst 
   const randomPerson = persons[randomIndex]
