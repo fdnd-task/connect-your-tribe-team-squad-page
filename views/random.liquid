@@ -1,1 +1,21 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
+
+
+<h1>{{ person.name }}</h1>
+
+{% for message in messages %}
+    <p>{{ message.from }}</p>
+    <p>{{ message.text }}</p>
+{% endfor %}
+
+<form action="/random" method="post">
+    <label>
+        Naam:
+        <input type="text" name="from" required>
+    </label>
+    <label>
+        Bericht:
+        <textarea name="text" required></textarea>
+    </label>
+    <button type="submit">verstuur</button>
+</form>
