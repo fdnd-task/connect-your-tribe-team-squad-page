@@ -95,6 +95,32 @@ app.get('/search', async function (request, response) {
   response.render('search.liquid', { query: q, persons: personResponseJSON.data, isSearch: isSearch });
 })
 
+app.get('/random', async function (request, response) {
+   
+  // Haalt alleen studenten van FDND Jaar 1 en cohort 2526 op uit de database
+  const paramsPerson = {
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526'
+  }
+  // Maakt de URL aan met de filters 
+  const apiURL =
+    'https://fdnd.directus.app/items/person/?' +
+    new URLSearchParams(paramsPerson)
+
+  const personResponse = await fetch(apiURL)
+  const personResponseJSON = await personResponse.json()
+
+  const persons = personResponseJSON.data
+  // Kies een random index op basis van het aantal personen
+  const randomIndex = Math.floor(Math.random() * persons.length)
+  // Met die index kiezen we een random persoon uit de lijst 
+  const randomPerson = persons[randomIndex]
+  
+  response.render('random.liquid', {
+    person: randomPerson
+  })
+})
+
 app.post('/', async function (request, response) {
 
   // Stuur een POST request naar de messages tabel
@@ -122,6 +148,42 @@ app.post('/', async function (request, response) {
 
   // Stuur de browser daarna weer naar de homepage
   response.redirect(303, '/')
+})
+
+app.get('/studenten', async function (request, response) {
+
+  const q = request.query.search || '' // kijken of er iets in de zoekbalk staat
+  const isSearch = q.length > 0 //true als er iets gezocht is en false als de zoekbalk leeg id
+
+
+  const params = {
+    'sort': 'name',
+    'fields': '*,squads.*',
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526',
+    'limit': '100'
+
+  }
+ 
+// Alleen zoekfilter toevoegen als er een zoekterm is
+ // Als er gezocht wordt, voeg dan een naam-filter toe
+// _icontains = zoekt hoofdletterongevoelig
+  if (isSearch) {
+    params['filter[name][_icontains]'] = q   
+  }
+
+  const personResponse = await fetch(
+    'https://fdnd.directus.app/items/person?' + new URLSearchParams(params)
+  )
+
+  const personResponseJSON = await personResponse.json()
+
+  response.render('artikelen.liquid', {
+    query: q,
+    persons: personResponseJSON.data,
+    isSearch: isSearch // true/false, voor de if in liquid
+  })
+
 })
 
 

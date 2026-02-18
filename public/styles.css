@@ -68,3 +68,82 @@ ul {
     }
 }
 
+
+
+/* iedereen page styling */
+
+
+.search-results {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.results-count {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.student-list {
+    list-style: none;
+    padding: 0;
+    max-width: 760px;
+}
+
+.student-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #000000;
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 0.5rem 1rem;
+    align-items: start;
+}
+
+.student-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.student-name {
+    font-size: var(--font-size-s);
+    margin: 0;
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.comment-button {
+    background: transparent;
+    border: none;
+    font-size: var(--font-size-s) ;
+    cursor: pointer;
+    grid-row: 1;
+    grid-column: 3;
+    transition: color 0.2s;
+}
+
+.student-bio {
+    color: var(--color-text-link);
+    font-size: var(--font-size-s);
+    margin: 0;
+    grid-row: 2;
+    grid-column: 1 / -1;
+
+}
+
+.student-details {
+    color: var(--color-text);
+    font-size: 0.8rem;
+    margin: 0;
+    grid-row: 3;
+    grid-column: 1 / -1;
+}
+
+.no-results {
+    color: var(--color-text);
+    padding: 2rem;
+}

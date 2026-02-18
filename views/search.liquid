@@ -1,5 +1,5 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
-
+ 
 <main>
 {% for person in persons %}
     <p>{{ person.name }}</p>
@@ -7,5 +7,5 @@
 {% if isSearch %}
     <p>je hebt gezocht op: {{ person.name }}</p>
 {% endif %}
-
+ 
 </main>

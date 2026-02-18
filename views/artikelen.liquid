@@ -1,0 +1,53 @@
+{% render 'partials/head.liquid', title: 'everyone' %}
+ 
+<main class="search-page">
+ 
+    <header class="search-header">
+        {% render 'partials/searchbar.liquid' %}
+    </header>    
+ 
+    <section class="search-results">
+ 
+        {% if isSearch %}
+         <p class="results-count">{{ persons.size }} resultaten voor "{{ query }}"</p>
+        {% else %}
+         <p>Alle {{ persons.size }} studenten</p>
+        {% endif %}
+ 
+ 
+      {% if persons.size > 0 %}
+        <ul class="student-list">
+            {% for person in persons %}
+             
+            <li class="student-item">
+               
+                <img
+                    class="student-avatar"
+                    src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=80&height=80&fit=cover
+                    {% else %} /assets/no-pic.jpg {% endif %}"
+                    alt="Foto van {{ person.name }}">
+ 
+                <h2 class="student-name">{{ person.name }}</h2>
+ 
+                <button class="comment-button" aria-label="Opmerking toevoegen">✏️</button>
+ 
+                <p class="student-bio">{{ person.bio | truncate: 100 }}</p>
+ 
+                <p class="student-details">
+                    Favoriete dier: {{ person.fav_animal }},
+                    favoriete seizoen: {{ person.fav_season }},
+                    lengte: {{ person.length }},
+                    {{ person.residency }},
+                    Haarkleur: {{ person.hair_color }}.
+                </p>
+ 
+            </li>
+ 
+            {% endfor %}
+        </ul>
+ 
+        {% else %}
+            <p>Geen studenten gevonden voor "{{ query }}" 😢</p>
+        {% endif %}
+ 
+</main>
